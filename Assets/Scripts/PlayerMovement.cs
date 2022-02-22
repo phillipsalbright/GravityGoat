@@ -27,6 +27,8 @@ public class PlayerMovement : MonoBehaviour
     private float jumpForce = 14;
     /** Multiplier for gravity. Drag is used to limit X and Y movement in air, may need extra gravity because of this. */
     private float gravityMultiplier = 2.6f;
+    /** Multiplier for gravity within a gravitational field */
+    private float fieldGravityMultiplier = .5f;
     private bool jumped;
 
     [Header("Drag")]
@@ -49,6 +51,11 @@ public class PlayerMovement : MonoBehaviour
     /** Rigidbody of the player */
     public Rigidbody player;
     private bool paused;
+
+    /** True or false depending on whether the player is in our out of each respective field */
+    private bool outField = false;
+    private bool inField = false;
+    private Vector3 fieldLocation;
 
     void Start()
     {
@@ -98,6 +105,13 @@ public class PlayerMovement : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         horizontalMovement = context.ReadValue<Vector2>().x;
+        if (inField || outField)
+        {
+            verticalMovement = context.ReadValue<Vector2>().y;
+        } else
+        {
+            verticalMovement = 0;
+        }
     }
 
     void FixedUpdate()
@@ -111,7 +125,13 @@ public class PlayerMovement : MonoBehaviour
      */
     void CalculateGravity()
     {
-        if (!OnSlope())
+        if (inField)
+        {
+            player.AddForce((this.transform.position - fieldLocation) * Physics.gravity.magnitude * fieldGravityMultiplier, ForceMode.Acceleration);
+        } else if (outField)
+        {
+            player.AddForce(-(this.transform.position - fieldLocation) * Physics.gravity.magnitude * fieldGravityMultiplier, ForceMode.Acceleration);
+        } else if (!OnSlope())
         {
             player.AddForce(Physics.gravity * gravityMultiplier, ForceMode.Acceleration);
         } else
@@ -122,7 +142,7 @@ public class PlayerMovement : MonoBehaviour
 
     void MovePlayer()
     {
-        moveDirection = new Vector3(1, 0, 0) * horizontalMovement;
+        moveDirection = new Vector3(1, 0, 0) * horizontalMovement + new Vector3(0, 1, 0) * verticalMovement;
         if (isGrounded && !OnSlope())
         {
             player.AddForce(movementMultiplier * moveSpeed * moveDirection, ForceMode.Acceleration);
@@ -151,5 +171,30 @@ public class PlayerMovement : MonoBehaviour
     public void Pause(InputAction.CallbackContext context)
     {
         paused = context.action.triggered;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == 7)
+        {
+            fieldLocation = other.gameObject.transform.position;
+            outField = true;
+        } else if (other.gameObject.layer == 8)
+        {
+            fieldLocation = other.gameObject.transform.position;
+            inField = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.layer == 7)
+        {
+            outField = false;
+        }
+        else if (other.gameObject.layer == 8)
+        {
+            inField = false;
+        }
     }
 }
