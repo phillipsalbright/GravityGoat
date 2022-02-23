@@ -121,7 +121,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     /**
-     * Calculates which type of gravity to use. Used to prevent player from slipping down slopes.
+     * Calculates which type of gravity to use.
      */
     void CalculateGravity()
     {
