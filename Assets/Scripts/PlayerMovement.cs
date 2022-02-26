@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections.Generic;
 
 /**
  * This class handles the basic, phsyics based, player movement. Many of the variables should be
@@ -53,10 +54,8 @@ public class PlayerMovement : MonoBehaviour
     private bool paused;
 
     /** True or false depending on whether the player is in our out of each respective field */
-    private bool outField = false;
-    private bool inField = false;
-    private Vector3 fieldLocation;
-
+    List<GravityField> currentFieldCollisions = new List<GravityField>();
+    
     void Start()
     {
         player.useGravity = false;
@@ -105,7 +104,7 @@ public class PlayerMovement : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         horizontalMovement = context.ReadValue<Vector2>().x;
-        if (inField || outField)
+        if (currentFieldCollisions.Count > 0)
         {
             verticalMovement = context.ReadValue<Vector2>().y;
         } else
@@ -125,12 +124,15 @@ public class PlayerMovement : MonoBehaviour
      */
     void CalculateGravity()
     {
-        if (inField)
+        if (currentFieldCollisions.Count > 0)
         {
-            player.AddForce((this.transform.position - fieldLocation) * Physics.gravity.magnitude * fieldGravityMultiplier, ForceMode.Acceleration);
-        } else if (outField)
-        {
-            player.AddForce(-(this.transform.position - fieldLocation) * Physics.gravity.magnitude * fieldGravityMultiplier, ForceMode.Acceleration);
+            Vector3 forceSum = new Vector3(0, 0, 0);
+            foreach(GravityField f in currentFieldCollisions)
+            {
+                Debug.Log(f.GetPosition());
+                forceSum += (this.transform.position - f.GetPosition()) * f.GetOutwardForce();
+            }
+            player.AddForce(forceSum * Physics.gravity.magnitude * fieldGravityMultiplier, ForceMode.Acceleration);
         } else if (!OnSlope())
         {
             player.AddForce(Physics.gravity * gravityMultiplier, ForceMode.Acceleration);
@@ -175,26 +177,17 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == 7)
+        if (other.gameObject.layer == 7 || other.gameObject.layer == 8)
         {
-            fieldLocation = other.gameObject.transform.position;
-            outField = true;
-        } else if (other.gameObject.layer == 8)
-        {
-            fieldLocation = other.gameObject.transform.position;
-            inField = true;
+            currentFieldCollisions.Add(other.gameObject.GetComponentInParent<GravityField>());
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.layer == 7)
+        if (other.gameObject.layer == 7 || other.gameObject.layer == 8)
         {
-            outField = false;
-        }
-        else if (other.gameObject.layer == 8)
-        {
-            inField = false;
+            currentFieldCollisions.Remove(other.gameObject.GetComponentInParent<GravityField>());
         }
     }
 }

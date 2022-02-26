@@ -21,7 +21,7 @@ public class GravityGunScript : MonoBehaviour
 
     public void OnShoot(InputAction.CallbackContext context)
     {
-        if (orbCount > 0 && Time.time >= nextTimeToFire)
+        if (context.action.triggered && orbCount > 0 && Time.time >= nextTimeToFire)
         {
             orbCount--;
             ui.UpdateOrbCount(orbCount);
@@ -33,13 +33,31 @@ public class GravityGunScript : MonoBehaviour
 
     public void OnAltShoot(InputAction.CallbackContext context)
     {
-        if (orbCount > 0 && Time.time >= nextTimeToFire)
+        if (context.action.triggered && orbCount > 0 && Time.time >= nextTimeToFire)
         {
             orbCount--;
             ui.UpdateOrbCount(orbCount);
             nextTimeToFire = Time.time + 1f / fireRate;
             GameObject launchedOrb = Instantiate(inwardOrb, launchOrigin.TransformPoint(0, 0, 0), launchOrigin.rotation);
             launchedOrb.GetComponent<Rigidbody>().AddForce(launchOrigin.forward * projectileForce, ForceMode.Impulse);
+        }
+    }
+
+    public void OnOrbRetrieve(InputAction.CallbackContext context)
+    {
+        if (context.action.triggered)
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(launchOrigin.position, launchOrigin.forward, out hit))
+            {
+                GameObject objectHit = hit.transform.gameObject;
+                if (objectHit.layer == 7 || objectHit.layer == 8)
+                {
+                    Destroy(objectHit.transform.parent.gameObject);
+                    orbCount++;
+                    ui.UpdateOrbCount(orbCount);
+                }
+            }
         }
     }
 }
