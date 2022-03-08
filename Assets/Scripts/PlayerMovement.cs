@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
     /** Multiplier for gravity. Drag is used to limit X and Y movement in air, may need extra gravity because of this. */
     private float gravityMultiplier = 2.6f;
     /** Multiplier for gravity within a gravitational field */
-    private float fieldGravityMultiplier = .5f;
+    private float fieldGravityMultiplier = .6f;
     private bool jumped;
 
     [Header("Drag")]

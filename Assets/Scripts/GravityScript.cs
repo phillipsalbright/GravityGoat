@@ -3,7 +3,7 @@ using UnityEngine;
 public class GravityScript : MonoBehaviour
 {
     private float gravityMultiplier = 2.6f;
-    private float fieldGravityMultiplier = .5f;
+    private float fieldGravityMultiplier = .6f;
     private Vector3 fieldLocation;
     private Rigidbody rb;
 

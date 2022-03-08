@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1397768089}
   - component: {fileID: 1397768090}
   - component: {fileID: 8708701101854831157}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: ArmHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -77,7 +77,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1732870732}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: LaunchPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 2102805718}
   - component: {fileID: 2102805717}
   - component: {fileID: 2102805716}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -209,7 +209,7 @@ GameObject:
   - component: {fileID: 6339101615050335858}
   - component: {fileID: 1121585428743062630}
   - component: {fileID: 3131164783968748539}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -470,7 +470,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2697828512304354793}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -500,7 +500,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7258586066754999011}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: CameraPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -530,7 +530,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 796891147133983010}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -562,7 +562,7 @@ GameObject:
   - component: {fileID: 8744538599767601714}
   - component: {fileID: 1713642095150028435}
   - component: {fileID: 3340500769232713563}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -698,7 +698,7 @@ GameObject:
   - component: {fileID: 650695570906241384}
   - component: {fileID: 9190254618170839912}
   - component: {fileID: 2568577321086055539}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
