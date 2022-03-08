@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class GravityScript : MonoBehaviour
 {
@@ -7,9 +8,7 @@ public class GravityScript : MonoBehaviour
     private Vector3 fieldLocation;
     private Rigidbody rb;
 
-    /** True or false depending on whether the physics object is in our out of each respective field */
-    private bool outField = false;
-    private bool inField = false;
+    List<GravityField> currentFieldCollisions = new List<GravityField>();
 
     private void Start()
     {
@@ -18,27 +17,17 @@ public class GravityScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == 7)
+        if (other.gameObject.layer == 7 || other.gameObject.layer == 8)
         {
-            fieldLocation = other.gameObject.transform.position;
-            outField = true;
-        }
-        else if (other.gameObject.layer == 8)
-        {
-            fieldLocation = other.gameObject.transform.position;
-            inField = true;
+            currentFieldCollisions.Add(other.gameObject.GetComponentInParent<GravityField>());
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.layer == 7)
+        if (other.gameObject.layer == 7 || other.gameObject.layer == 8)
         {
-            outField = false;
-        }
-        else if (other.gameObject.layer == 8)
-        {
-            inField = false;
+            currentFieldCollisions.Remove(other.gameObject.GetComponentInParent<GravityField>());
         }
     }
 
@@ -49,15 +38,23 @@ public class GravityScript : MonoBehaviour
 
     void CalculateGravity()
     {
-        if (inField)
+        if (currentFieldCollisions.Count > 0)
         {
-            rb.AddForce((this.transform.position - fieldLocation) * Physics.gravity.magnitude * fieldGravityMultiplier, ForceMode.Acceleration);
-        }
-        else if (outField)
-        {
-            rb.AddForce(-(this.transform.position - fieldLocation) * Physics.gravity.magnitude * fieldGravityMultiplier, ForceMode.Acceleration);
-        }
-        else
+            Vector3 forceSum = new Vector3(0, 0, 0);
+            foreach (GravityField f in currentFieldCollisions)
+            {
+                if (f != null)
+                {
+                    forceSum += (this.transform.position - f.GetPosition()) * f.GetOutwardForce();
+                }
+                else
+                {
+                    currentFieldCollisions.Remove(f);
+                    break;
+                }
+            }
+            rb.AddForce(forceSum * Physics.gravity.magnitude * fieldGravityMultiplier, ForceMode.Acceleration);
+        } else
         {
             rb.AddForce(Physics.gravity * gravityMultiplier, ForceMode.Acceleration);
         }

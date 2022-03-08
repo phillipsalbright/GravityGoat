@@ -59,5 +59,17 @@ public class GravityGunScript : MonoBehaviour
                 }
             }
         }
+        PlayerMovement pm = this.gameObject.GetComponentInParent<PlayerMovement>();
+        if (pm != null)
+        {
+            foreach (GravityField f in pm.currentFieldCollisions)
+            {
+                pm.currentFieldCollisions.Remove(f);
+                Destroy(f.gameObject);
+                orbCount++;
+                ui.UpdateOrbCount(orbCount);
+                break;
+            }
+        }
     }
 }

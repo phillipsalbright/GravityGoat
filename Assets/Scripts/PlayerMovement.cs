@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
     /** Multiplier for gravity. Drag is used to limit X and Y movement in air, may need extra gravity because of this. */
     private float gravityMultiplier = 2.6f;
     /** Multiplier for gravity within a gravitational field */
-    private float fieldGravityMultiplier = .6f;
+    private float fieldGravityMultiplier = .5f;
     private bool jumped;
 
     [Header("Drag")]
@@ -53,8 +53,7 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody player;
     private bool paused;
 
-    /** True or false depending on whether the player is in our out of each respective field */
-    List<GravityField> currentFieldCollisions = new List<GravityField>();
+    public List<GravityField> currentFieldCollisions = new List<GravityField>();
     
     void Start()
     {
@@ -129,8 +128,14 @@ public class PlayerMovement : MonoBehaviour
             Vector3 forceSum = new Vector3(0, 0, 0);
             foreach(GravityField f in currentFieldCollisions)
             {
-                Debug.Log(f.GetPosition());
-                forceSum += (this.transform.position - f.GetPosition()) * f.GetOutwardForce();
+                if (f != null)
+                {
+                    forceSum += (this.transform.position - f.GetPosition()) * f.GetOutwardForce();
+                } else
+                {
+                    currentFieldCollisions.Remove(f);
+                    break;
+                }
             }
             player.AddForce(forceSum * Physics.gravity.magnitude * fieldGravityMultiplier, ForceMode.Acceleration);
         } else if (!OnSlope())
