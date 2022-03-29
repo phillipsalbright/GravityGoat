@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ForceFieldMat
+  m_Name: RepForceFieldMat
   m_Shader: {fileID: -6465566751694194690, guid: 3bee3b57a6a17b341bf32362cf928ab9, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -37,9 +37,9 @@ Material:
     - Vector1_78193fe0b5e34e0497b80d74ef6a0a70: 0.006
     - Vector1_8836b414b5f246a69b547db14fb96b0b: 3.82
     - Vector1_8ade4a7da43d4d388e6fb9b3085a4f4d: 20.97
-    - Vector1_9367c7c0e6224dfeb0f4d2b5d4337762: -2.72
+    - Vector1_9367c7c0e6224dfeb0f4d2b5d4337762: -1.89
     - Vector1_99cb34c648ce40419bbcde0c39eaddb7: 4.13
-    - Vector1_a5b59d56071a407db6de1bc6a287fd15: 0.005
+    - Vector1_a5b59d56071a407db6de1bc6a287fd15: 0.003
     - Vector1_abe537d5069f459cb468f3108345e4b9: 0.65
     - Vector1_ef48ca3ffd8747c3a8be683a4a7d0f63: 3.72
     - Vector1_f34f85e6751f4faeb0272aa2abff7817: 6.88
