@@ -34,7 +34,7 @@ public class ArmScript : MonoBehaviour
 
     void FixedUpdate()
     {
-        yRotation = player.rotation.eulerAngles.y;
+        //yRotation = player.rotation.eulerAngles.y;
         mouse_pos = new Vector3(Mouse.current.position.ReadValue().x, Mouse.current.position.ReadValue().y, 0);
         mouse_pos.z = 15.4f; //The distance between the camera and object
         object_pos = GameObject.Find("MainCamera").GetComponent<Camera>().WorldToScreenPoint(target.position);
@@ -47,7 +47,7 @@ public class ArmScript : MonoBehaviour
         if ((Math.Abs(mouse_pos2.x) + Math.Abs(mouse_pos2.y)) >= 50)
         {
             float rotAngle;
-            if (yRotation == 180)
+            if (turnedLeft)
             {
                 rotAngle = 160;
             } else
@@ -56,7 +56,7 @@ public class ArmScript : MonoBehaviour
             }
             angle = (Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg) + rotAngle;
             //angle -= 90;
-            if (yRotation == 0)
+            if (!turnedLeft)
             {
                 objectToRotate.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
             }
@@ -69,14 +69,19 @@ public class ArmScript : MonoBehaviour
             if (zRotation < 300 && zRotation > 195)
             {
                 Vector3 rot = player.rotation.eulerAngles;
-                if (rot.y == 0)
+                if (!turnedLeft)
                 {
                     rot.y += 180;
+                    turnedLeft = true;
                 } else
                 {
                     rot.y -= 180;
+                    turnedLeft = false;
                 }
+                player.GetComponent<Rigidbody>().freezeRotation = false;
                 player.rotation = Quaternion.Euler(rot);
+                player.GetComponent<Rigidbody>().freezeRotation = true;
+                yRotation = rot.y;
             }
         }
     }
