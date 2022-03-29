@@ -60,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         player.useGravity = false;
-        player.freezeRotation = true;
+        //player.freezeRotation = true;
     }
 
     void Update()
