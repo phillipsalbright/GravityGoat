@@ -52,6 +52,8 @@ public class PlayerMovement : MonoBehaviour
     /** Rigidbody of the player */
     public Rigidbody player;
     private bool paused;
+    private bool walking;
+    [SerializeField] Animator bodyAnimator;
 
     public List<GravityField> currentFieldCollisions = new List<GravityField>();
     
@@ -89,19 +91,24 @@ public class PlayerMovement : MonoBehaviour
         player.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
 
+    /** Also controls jumping for animator */
     void ControlDrag()
     {
         if (isGrounded)
         {
+            bodyAnimator.SetBool("InAir", false);
             player.drag = groundDrag;
         } else
         {
+            bodyAnimator.SetBool("InAir", true);
             player.drag = airDrag;
         }
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
+        walking = context.action.triggered;
+        bodyAnimator.SetBool("Walking", walking);
         horizontalMovement = context.ReadValue<Vector2>().x;
         if (currentFieldCollisions.Count > 0)
         {
@@ -150,6 +157,7 @@ public class PlayerMovement : MonoBehaviour
     void MovePlayer()
     {
         moveDirection = new Vector3(1, 0, 0) * horizontalMovement + new Vector3(0, 1, 0) * verticalMovement;
+
         if (isGrounded && !OnSlope())
         {
             player.AddForce(movementMultiplier * moveSpeed * moveDirection, ForceMode.Acceleration);
