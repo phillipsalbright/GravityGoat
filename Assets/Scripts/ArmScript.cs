@@ -37,10 +37,10 @@ public class ArmScript : MonoBehaviour
         //yRotation = player.rotation.eulerAngles.y;
         mouse_pos = new Vector3(Mouse.current.position.ReadValue().x, Mouse.current.position.ReadValue().y, 0);
         mouse_pos.z = 15.4f; //The distance between the camera and object
-        object_pos = GameObject.Find("MainCamera").GetComponent<Camera>().WorldToScreenPoint(target.position);
+        object_pos = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>().WorldToScreenPoint(target.position);
         mouse_pos.x -= object_pos.x;
         mouse_pos.y -= object_pos.y;
-        Vector3 object_pos2 = GameObject.Find("MainCamera").GetComponent<Camera>().WorldToScreenPoint(objectToRotate.position);
+        Vector3 object_pos2 = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>().WorldToScreenPoint(objectToRotate.position);
         Vector3 mouse_pos2 = Mouse.current.position.ReadValue();
         mouse_pos2.x -= object_pos2.x;
         mouse_pos2.y -= object_pos2.y;
@@ -55,7 +55,6 @@ public class ArmScript : MonoBehaviour
                 rotAngle = 35;
             }
             angle = (Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg) + rotAngle;
-            //angle -= 90;
             if (!turnedLeft)
             {
                 objectToRotate.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
@@ -65,7 +64,6 @@ public class ArmScript : MonoBehaviour
                 objectToRotate.rotation = Quaternion.Euler(new Vector3(0, 180, -angle));
             }
             float zRotation = objectToRotate.rotation.eulerAngles.z;
-            Debug.Log(zRotation);
             if (zRotation < 300 && zRotation > 195)
             {
                 Vector3 rot = player.rotation.eulerAngles;

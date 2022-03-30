@@ -111,13 +111,13 @@ public class IntroductionPlayerMovementScript : MonoBehaviour
         if (horizontalMovement < 0)
         {
             rot.y = 180;
-        } else
+        } else if (horizontalMovement > 0)
         {
-            rot.y = -180;
+            rot.y = 0;
         }
-        player.GetComponent<Rigidbody>().freezeRotation = false;
+        player.freezeRotation = false;
         transform.rotation = Quaternion.Euler(rot);
-        player.GetComponent<Rigidbody>().freezeRotation = true;
+        player.freezeRotation = true;
         if (currentFieldCollisions.Count > 0)
         {
             verticalMovement = context.ReadValue<Vector2>().y;
