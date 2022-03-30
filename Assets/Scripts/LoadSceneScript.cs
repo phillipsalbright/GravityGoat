@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class LoadSceneScript : MonoBehaviour
 {
-    private int sceneToLoad = 2;
+    public int sceneToLoad = 2;
 
     private void OnTriggerEnter(Collider other)
     {
