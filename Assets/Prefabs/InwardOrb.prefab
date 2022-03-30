@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7046056493385861187}
   - component: {fileID: 7046056493385861186}
   - component: {fileID: 7046056493385861185}
+  - component: {fileID: 5787126114532720873}
   - component: {fileID: 4898097664913366112}
   m_Layer: 0
   m_Name: InwardOrb
@@ -98,6 +99,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5787126114532720873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7046056493385861184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a732b25fdadb7204ea2268b831351c71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  field: {fileID: 7046056493385861184}
 --- !u!114 &4898097664913366112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,7 +174,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7046056494025476629}
   m_Enabled: 1
-  m_CastShadows: 0
+  m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1
@@ -232,7 +246,7 @@ Transform:
   m_GameObject: {fileID: 8834148556754498857}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.5, y: 2.5, z: 3}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_Children: []
   m_Father: {fileID: 7046056493385861188}
   m_RootOrder: 1
@@ -250,7 +264,7 @@ Light:
   m_Shape: 0
   m_Color: {r: 0.7617806, g: 0.1462264, b: 1, a: 1}
   m_Intensity: 15
-  m_Range: 15
+  m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10

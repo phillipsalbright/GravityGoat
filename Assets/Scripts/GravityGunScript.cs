@@ -26,7 +26,7 @@ public class GravityGunScript : MonoBehaviour
             orbCount--;
             ui.UpdateOrbCount(orbCount);
             nextTimeToFire = Time.time + 1f / fireRate;
-            GameObject launchedOrb = Instantiate(outwardOrb, launchOrigin.TransformPoint(0, 0, 0) + new Vector3(0, 0, -.5f), launchOrigin.rotation);
+            GameObject launchedOrb = Instantiate(outwardOrb, launchOrigin.TransformPoint(0, 0, 0) + new Vector3(0, 0, .5f), launchOrigin.rotation);
             launchedOrb.GetComponent<Rigidbody>().AddForce(launchOrigin.forward * projectileForce, ForceMode.Impulse);
         }
     }
@@ -38,7 +38,7 @@ public class GravityGunScript : MonoBehaviour
             orbCount--;
             ui.UpdateOrbCount(orbCount);
             nextTimeToFire = Time.time + 1f / fireRate;
-            GameObject launchedOrb = Instantiate(inwardOrb, launchOrigin.TransformPoint(0, 0, 0) + new Vector3(0, 0, -.5f), launchOrigin.rotation);
+            GameObject launchedOrb = Instantiate(inwardOrb, launchOrigin.TransformPoint(0, 0, 0) + new Vector3(0, 0, .5f), launchOrigin.rotation);
             launchedOrb.GetComponent<Rigidbody>().AddForce(launchOrigin.forward * projectileForce, ForceMode.Impulse);
         }
     }
