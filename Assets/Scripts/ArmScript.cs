@@ -3,7 +3,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 /**
- * Makes the arm move with the mouse on the player prefab.
+ * Makes the arm move with the mouse on the player prefab. Has become very complex for this specific scenario, especially
+ * with regards to our rendering system for sprites.
  */
 public class ArmScript : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class ArmScript : MonoBehaviour
     /** Base of the wand (where the hand touches it) */
     public Transform target;
 
-    /** Should have pivot where the shoulder joint is */
+    /** Should have pivot where the shoulder joint is, or sprite itself */
     public Transform objectToRotate;
 
     public Vector3 object_pos;
@@ -27,12 +28,16 @@ public class ArmScript : MonoBehaviour
     /** Set to the whole player in editor */
     [SerializeField] private Transform player;
 
+    [SerializeField] private SpriteRenderer body;
+    [SerializeField] private SpriteRenderer arm;
+    [SerializeField] private Transform arm2;
+
     private void Start()
     {
         turnedLeft = false;
     }
 
-    void FixedUpdate()
+    void Update()
     {
         //yRotation = player.rotation.eulerAngles.y;
         mouse_pos = new Vector3(Mouse.current.position.ReadValue().x, Mouse.current.position.ReadValue().y, 0);
@@ -49,7 +54,7 @@ public class ArmScript : MonoBehaviour
             float rotAngle;
             if (turnedLeft)
             {
-                rotAngle = 160;
+                rotAngle = 146;
             } else
             {
                 rotAngle = 35;
@@ -61,12 +66,14 @@ public class ArmScript : MonoBehaviour
             }
             else
             {
-                objectToRotate.rotation = Quaternion.Euler(new Vector3(0, 180, -angle));
+                objectToRotate.localRotation = Quaternion.Euler(new Vector3(0, 180, angle));
             }
-            float zRotation = objectToRotate.rotation.eulerAngles.z;
-            if (zRotation < 300 && zRotation > 195)
+            float zRotation = objectToRotate.localRotation.eulerAngles.z;
+            Debug.Log(zRotation);
+            if ((!turnedLeft && zRotation < 300 && zRotation > 195) || (turnedLeft && zRotation < 165 && zRotation > 60))
             {
                 Vector3 rot = player.rotation.eulerAngles;
+                Vector3 negRot = rot;
                 if (!turnedLeft)
                 {
                     rot.y += 180;
@@ -79,6 +86,22 @@ public class ArmScript : MonoBehaviour
                 player.GetComponent<Rigidbody>().freezeRotation = false;
                 player.rotation = Quaternion.Euler(rot);
                 player.GetComponent<Rigidbody>().freezeRotation = true;
+                if (turnedLeft)
+                {
+                    body.flipX = true;
+                    arm.flipX = true;
+                    arm2.localRotation = Quaternion.Euler(rot);
+                    body.gameObject.transform.rotation = Quaternion.Euler(negRot);
+                } else
+                {
+                    body.flipX = false;
+                    arm.flipX = false;
+
+                    body.gameObject.transform.rotation = Quaternion.Euler(rot);
+
+                    arm2.localRotation = Quaternion.Euler(rot);
+                    Debug.Log(arm.gameObject.transform.localRotation.eulerAngles);
+                }
                 yRotation = rot.y;
             }
         }
