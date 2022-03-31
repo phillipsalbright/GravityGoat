@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: TorchFlame
-  m_Shader: {fileID: -6465566751694194690, guid: eb42e0e68e05dbc4caae0b30e282b2d3, type: 3}
+  m_Name: MeshSpriteMat
+  m_Shader: {fileID: -6465566751694194690, guid: 2296c9bfab41b3f4da9ad976549a5ea5, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -19,6 +19,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: b28e9800796a27c48bffa78a6fbad20e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -32,9 +36,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_64a2c797e58a4e47b1fd235ceccf9bcc: 5
-    - Vector1_c7779cf8c6f04281aa1719ab557af24f: 0.2
-    - Vector1_fae987b59d6a4f2c9f83efc5fb3f4287: 16.1
-    m_Colors:
-    - Color_018f4198c74b45a9b2384d1b954f2af9: {r: 10.656753, g: 3.6779118, b: 2.6781363, a: 0}
+    - Vector1_e548c702a0cb4bcda404e71c01fe535e: 0
+    - _Cutoff: 0.5
+    m_Colors: []
   m_BuildTextureStacks: []
