@@ -1690,33 +1690,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2131957184701627114, guid: 321b82bb83c3d6e45b1a25d1dab6c2c4, type: 3}
-      propertyPath: m_CastShadows
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2682464899275416650, guid: 321b82bb83c3d6e45b1a25d1dab6c2c4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 3189545561054314295, guid: 321b82bb83c3d6e45b1a25d1dab6c2c4, type: 3}
-      propertyPath: BodySprite
-      value: 
-      objectReference: {fileID: 1137354181}
-    - target: {fileID: 6897014287048547639, guid: 321b82bb83c3d6e45b1a25d1dab6c2c4, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7470314340233231224, guid: 321b82bb83c3d6e45b1a25d1dab6c2c4, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 321b82bb83c3d6e45b1a25d1dab6c2c4, type: 3}
---- !u!4 &1137354181 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7334334015992277602, guid: 321b82bb83c3d6e45b1a25d1dab6c2c4, type: 3}
-  m_PrefabInstance: {fileID: 1001844602}
-  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1273826614
 Mesh:
   m_ObjectHideFlags: 0
@@ -2360,30 +2335,6 @@ Transform:
   m_Father: {fileID: 1801401063}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
---- !u!1 &1790626683 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7309711254192702009, guid: 321b82bb83c3d6e45b1a25d1dab6c2c4, type: 3}
-  m_PrefabInstance: {fileID: 1001844602}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1790626688
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1790626683}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 090200cb67dc1f74297670b21276a482, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1801401062
 GameObject:
   m_ObjectHideFlags: 0
