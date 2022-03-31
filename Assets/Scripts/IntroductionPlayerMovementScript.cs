@@ -50,6 +50,7 @@ public class IntroductionPlayerMovementScript : MonoBehaviour
     private bool paused;
     private bool walking;
     [SerializeField] Animator bodyAnimator;
+    [SerializeField] Transform BodySprite;
 
     public List<GravityField> currentFieldCollisions = new List<GravityField>();
 
@@ -111,9 +112,13 @@ public class IntroductionPlayerMovementScript : MonoBehaviour
         if (horizontalMovement < 0)
         {
             rot.y = 180;
+            BodySprite.GetComponent<SpriteRenderer>().flipX = true;
+            BodySprite.localRotation = Quaternion.Euler(new Vector3(0, 180, 0));
         } else if (horizontalMovement > 0)
         {
             rot.y = 0;
+            BodySprite.GetComponent<SpriteRenderer>().flipX = false;
+            BodySprite.localRotation = Quaternion.Euler(rot);
         }
         player.freezeRotation = false;
         transform.rotation = Quaternion.Euler(rot);
