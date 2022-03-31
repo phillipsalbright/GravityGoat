@@ -266,6 +266,7 @@ MonoBehaviour:
     m_Bits: 64
   player: {fileID: 1341684306945711390}
   bodyAnimator: {fileID: 4351391158915461920}
+  BodySprite: {fileID: 7334334015992277602}
   currentFieldCollisions: []
 --- !u!1 &4652738898199089178
 GameObject:
