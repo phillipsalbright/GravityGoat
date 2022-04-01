@@ -69,7 +69,6 @@ public class ArmScript : MonoBehaviour
                 objectToRotate.localRotation = Quaternion.Euler(new Vector3(0, 180, angle));
             }
             float zRotation = objectToRotate.localRotation.eulerAngles.z;
-            Debug.Log(zRotation);
             if ((!turnedLeft && zRotation < 300 && zRotation > 195) || (turnedLeft && zRotation < 165 && zRotation > 60))
             {
                 Vector3 rot = player.rotation.eulerAngles;
@@ -100,7 +99,6 @@ public class ArmScript : MonoBehaviour
                     body.gameObject.transform.rotation = Quaternion.Euler(rot);
 
                     arm2.localRotation = Quaternion.Euler(rot);
-                    Debug.Log(arm.gameObject.transform.localRotation.eulerAngles);
                 }
                 yRotation = rot.y;
             }
