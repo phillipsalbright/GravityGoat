@@ -38,7 +38,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "New action",
+                    "name": "Restart",
                     "type": "Button",
                     "id": "0e904e3c-3606-4706-9dcc-38d7e12d88cb",
                     "expectedControlType": "Button",
@@ -197,17 +197,6 @@
                 },
                 {
                     "name": "",
-                    "id": "22c0c984-6345-4d31-a5cf-a503bf44ac90",
-                    "path": "<Keyboard>/w",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "9dd86f77-f60c-4c30-95c9-c9d87976e363",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
@@ -264,11 +253,22 @@
                 {
                     "name": "",
                     "id": "15f28de6-da31-47b2-938c-7c82a0820fab",
-                    "path": "<Joystick>/stick/up",
+                    "path": "<Keyboard>/r",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "Restart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "55c799fa-73af-42d4-bf8d-109317160d51",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Restart",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

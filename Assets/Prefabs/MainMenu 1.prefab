@@ -491,7 +491,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1048814229270579223, guid: 41e33777eaf0d8c4f84dcd818a328012, type: 3}
+      - m_Target: {fileID: 9150857902869351653}
         m_TargetAssemblyTypeName: MainMenuObject, Assembly-CSharp
         m_MethodName: LoadScene
         m_Mode: 3
@@ -700,7 +700,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Testing Scene
+  m_Text: Level 3
 --- !u!1 &5878717514267655517
 GameObject:
   m_ObjectHideFlags: 0
@@ -779,7 +779,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Tutorial
+  m_Text: Introduction
 --- !u!1 &5878717514273883958
 GameObject:
   m_ObjectHideFlags: 0
@@ -971,7 +971,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5878717514447305629
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1074,7 +1074,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1048814229270579223, guid: 41e33777eaf0d8c4f84dcd818a328012, type: 3}
+      - m_Target: {fileID: 9150857902869351653}
         m_TargetAssemblyTypeName: MainMenuObject, Assembly-CSharp
         m_MethodName: LoadScene
         m_Mode: 3
@@ -1426,7 +1426,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1567,7 +1567,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -150}
+  m_AnchoredPosition: {x: -350, y: -150}
   m_SizeDelta: {x: 400, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5878717514980951438
@@ -1652,7 +1652,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1048814229270579223, guid: 41e33777eaf0d8c4f84dcd818a328012, type: 3}
+      - m_Target: {fileID: 9150857902869351653}
         m_TargetAssemblyTypeName: MainMenuObject, Assembly-CSharp
         m_MethodName: LoadScene
         m_Mode: 3
@@ -2009,11 +2009,12 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Phillips Albright
+  m_Text: 'Programming Lead: Phillips Albright
 
-    Thomas Gelman
+    2D Art Lead: Thomas Gelman
 
-    Dayton Busse'
+    3D
+    Art Lead: Dayton Busse'
 --- !u!1 &6853146654013015672
 GameObject:
   m_ObjectHideFlags: 0
@@ -2244,7 +2245,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6853146654120008386
 RectTransform:
   m_ObjectHideFlags: 0
