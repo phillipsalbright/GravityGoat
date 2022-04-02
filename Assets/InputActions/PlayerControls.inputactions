@@ -38,7 +38,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "New action",
+                    "name": "Restart",
                     "type": "Button",
                     "id": "0e904e3c-3606-4706-9dcc-38d7e12d88cb",
                     "expectedControlType": "Button",
@@ -253,11 +253,22 @@
                 {
                     "name": "",
                     "id": "15f28de6-da31-47b2-938c-7c82a0820fab",
-                    "path": "<Joystick>/stick/up",
+                    "path": "<Keyboard>/r",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "Restart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "55c799fa-73af-42d4-bf8d-109317160d51",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Restart",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
