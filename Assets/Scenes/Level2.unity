@@ -189,7 +189,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 70b8bc4b6b82bb64481e609f146bd87a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: b792016a793b1a942a7b9b2a49196305, type: 2}
+      objectReference: {fileID: 2100000, guid: 633f1beafd1dcbb48b1befe437b22c77, type: 2}
     - target: {fileID: 919132149155446097, guid: 70b8bc4b6b82bb64481e609f146bd87a, type: 3}
       propertyPath: m_Name
       value: Crystal2
@@ -258,7 +258,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 4ea6956e2262503478399aeb0ec4964d, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: b792016a793b1a942a7b9b2a49196305, type: 2}
+      objectReference: {fileID: 2100000, guid: 633f1beafd1dcbb48b1befe437b22c77, type: 2}
     - target: {fileID: 919132149155446097, guid: 4ea6956e2262503478399aeb0ec4964d, type: 3}
       propertyPath: m_Name
       value: Crystal4 (1)
@@ -1421,7 +1421,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 4ea6956e2262503478399aeb0ec4964d, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: b792016a793b1a942a7b9b2a49196305, type: 2}
+      objectReference: {fileID: 2100000, guid: 633f1beafd1dcbb48b1befe437b22c77, type: 2}
     - target: {fileID: 919132149155446097, guid: 4ea6956e2262503478399aeb0ec4964d, type: 3}
       propertyPath: m_Name
       value: Crystal4

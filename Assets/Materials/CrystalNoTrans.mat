@@ -20,13 +20,13 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Crystal
-  m_Shader: {fileID: -6465566751694194690, guid: 02cc6cd5b53684348aad291d429ce629, type: 3}
+  m_Name: CrystalNoTrans
+  m_Shader: {fileID: -6465566751694194690, guid: 125438305cb65464bb1b6de1306f2967, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3001
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -126,7 +126,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_5fd9447af14b479eb2734ef807cd3c3f: {r: 15.718522, g: 1.2359732, b: 29.508846, a: 0}
+    - Color_5fd9447af14b479eb2734ef807cd3c3f: {r: 4.5254836, g: 0.39930737, b: 8.47419, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
