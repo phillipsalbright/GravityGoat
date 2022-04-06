@@ -54,10 +54,14 @@ public class GravityGunScript : MonoBehaviour
                 GameObject objectHit = hit.transform.gameObject;
                 if (objectHit.layer == 7 || objectHit.layer == 8)
                 {
-                    objectHit.transform.GetComponentInParent<GravityField>().Implode();
-                    //Destroy(objectHit.transform.parent.gameObject);
-                    orbCount++;
-                    ui.UpdateOrbCount(orbCount);
+                    GravityField f = objectHit.transform.GetComponentInParent<GravityField>();
+                    if (f.GetActive())
+                    {
+                        f.Implode();
+                        //Destroy(objectHit.transform.parent.gameObject);
+                        orbCount++;
+                        ui.UpdateOrbCount(orbCount);
+                    }
                 }
             }
         }
@@ -66,11 +70,14 @@ public class GravityGunScript : MonoBehaviour
         {
             foreach (GravityField f in pm.currentFieldCollisions)
             {
-                pm.currentFieldCollisions.Remove(f);
-                Destroy(f.gameObject);
-                orbCount++;
-                ui.UpdateOrbCount(orbCount);
-                break;
+                if (f.GetActive())
+                {
+                    pm.currentFieldCollisions.Remove(f);
+                    Destroy(f.gameObject);
+                    orbCount++;
+                    ui.UpdateOrbCount(orbCount);
+                    break;
+                }
             }
         }
     }
