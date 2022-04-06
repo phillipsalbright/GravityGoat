@@ -73,7 +73,7 @@ public class GravityGunScript : MonoBehaviour
                 if (f.GetActive())
                 {
                     pm.currentFieldCollisions.Remove(f);
-                    Destroy(f.gameObject);
+                    f.Implode();
                     orbCount++;
                     ui.UpdateOrbCount(orbCount);
                     break;

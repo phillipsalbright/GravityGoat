@@ -34,6 +34,7 @@ public class GravityField : MonoBehaviour
     public void Implode()
     {
         active = false;
+        this.gameObject.layer = 0;
         StartCoroutine("ImplodingWithAnimation");
     }
 
@@ -41,7 +42,10 @@ public class GravityField : MonoBehaviour
     {
         animator.Play("FieldAbsorb");
         destroyParticle.Play();
+        this.GetComponent<Collider>().enabled = false;
         this.GetComponent<MeshRenderer>().enabled = false;
+        yield return new WaitForSeconds(.5f);
+        this.GetComponentInChildren<Light>().enabled = false;
         yield return new WaitForSeconds(2f);
         Destroy(this.gameObject);
     }
