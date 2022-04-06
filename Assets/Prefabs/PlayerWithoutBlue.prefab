@@ -386,7 +386,7 @@ GameObject:
   - component: {fileID: 1121585428743062630}
   - component: {fileID: 3131164783968748539}
   m_Layer: 3
-  m_Name: Player
+  m_Name: PlayerWithoutBlue
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -621,8 +621,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8708701101854831157}
         m_TargetAssemblyTypeName: GravityGunScript, Assembly-CSharp
-        m_MethodName: OnAltShoot
-        m_Mode: 0
+        m_MethodName: 
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

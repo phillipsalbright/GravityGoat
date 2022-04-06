@@ -11,7 +11,7 @@ public class GravityGunScript : MonoBehaviour
     /** Set to an empty game object child of the arm, the place where gravity orbs will be launched from */
     [SerializeField] private Transform launchOrigin;
     [SerializeField] private LayerMask layers;
-    private float projectileForce = 22f;
+    private float projectileForce = 25f;
     private float fireRate = 1f;
     private float nextTimeToFire = 0f;
 
@@ -54,7 +54,8 @@ public class GravityGunScript : MonoBehaviour
                 GameObject objectHit = hit.transform.gameObject;
                 if (objectHit.layer == 7 || objectHit.layer == 8)
                 {
-                    Destroy(objectHit.transform.parent.gameObject);
+                    objectHit.transform.GetComponentInParent<GravityField>().Implode();
+                    //Destroy(objectHit.transform.parent.gameObject);
                     orbCount++;
                     ui.UpdateOrbCount(orbCount);
                 }
