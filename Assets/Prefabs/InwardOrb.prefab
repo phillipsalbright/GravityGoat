@@ -9840,6 +9840,7 @@ MonoBehaviour:
   animator: {fileID: 3070635867730114064}
   impactParticle: {fileID: 1885646503045600571}
   destroyParticle: {fileID: 3725632961113825639}
+  field: {fileID: 7046056494025476631}
 --- !u!1 &7046056494025476629
 GameObject:
   m_ObjectHideFlags: 0
