@@ -113,9 +113,12 @@ public class PlayerMovement : MonoBehaviour
         horizontalMovement = context.ReadValue<Vector2>().x;
         if (Mathf.Abs(horizontalMovement) > 0)
         {
-            walking = context.action.triggered;
-            bodyAnimator.SetBool("Walking", walking);
+            walking = true;
+        } else
+        {
+            walking = false;
         }
+        bodyAnimator.SetBool("Walking", walking);
         if (currentFieldCollisions.Count > 0)
         {
             verticalMovement = context.ReadValue<Vector2>().y;
