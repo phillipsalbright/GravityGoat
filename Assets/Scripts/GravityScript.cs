@@ -43,7 +43,7 @@ public class GravityScript : MonoBehaviour
             Vector3 forceSum = new Vector3(0, 0, 0);
             foreach (GravityField f in currentFieldCollisions)
             {
-                if (f != null)
+                if (f != null && f.GetActive())
                 {
                     forceSum += (this.transform.position - f.GetPosition()) * f.GetOutwardForce();
                 }
