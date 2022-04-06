@@ -3118,6 +3118,10 @@ PrefabInstance:
       propertyPath: orbCount
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8708701101854831157, guid: b0f5a895eae77234fbd7fe5f25db739a, type: 3}
+      propertyPath: layers.m_Bits
+      value: 384
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0f5a895eae77234fbd7fe5f25db739a, type: 3}
 --- !u!43 &1391170668
