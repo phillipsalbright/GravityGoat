@@ -103,6 +103,9 @@ MonoBehaviour:
   arm: {fileID: 1397768090}
   ui: {fileID: 2568577321086055539}
   launchOrigin: {fileID: 507062868}
+  layers:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1 &1645353546
 GameObject:
   m_ObjectHideFlags: 0
