@@ -14,4 +14,9 @@ public class GravityField : MonoBehaviour
     {
         return outwardForce;
     }
+
+    public void Implode()
+    {
+        Destroy(this.gameObject);
+    }
 }

@@ -44,6 +44,9 @@ public class TrackingCameraScript : MonoBehaviour
                 xval = minXPos;
             }
             this.gameObject.transform.position = new Vector3(xval, yval, zval);
+        } else
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
         }
     }
 }

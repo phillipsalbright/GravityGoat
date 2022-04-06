@@ -53,10 +53,11 @@ public class GravityScript : MonoBehaviour
                     break;
                 }
             }
+            rb.useGravity = false;
             rb.AddForce(forceSum * Physics.gravity.magnitude * fieldGravityMultiplier, ForceMode.Acceleration);
         } else
         {
-            rb.AddForce(Physics.gravity * gravityMultiplier, ForceMode.Acceleration);
+            rb.useGravity = true;
         }
     }
 }
