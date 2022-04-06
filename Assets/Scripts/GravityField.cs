@@ -8,10 +8,17 @@ public class GravityField : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private ParticleSystem impactParticle;
     [SerializeField] private ParticleSystem destroyParticle;
+    private bool active;
 
     public void Start()
     {
         impactParticle.Play();
+        active = true;
+    }
+
+    public bool GetActive()
+    {
+        return active;
     }
 
     public Vector3 GetPosition()
@@ -26,6 +33,7 @@ public class GravityField : MonoBehaviour
 
     public void Implode()
     {
+        active = false;
         StartCoroutine("ImplodingWithAnimation");
     }
 
@@ -33,7 +41,8 @@ public class GravityField : MonoBehaviour
     {
         animator.Play("FieldAbsorb");
         destroyParticle.Play();
-        yield return new WaitForSeconds(.5f);
+        this.GetComponent<MeshRenderer>().enabled = false;
+        yield return new WaitForSeconds(2f);
         Destroy(this.gameObject);
     }
 }
