@@ -48,35 +48,40 @@ public class GravityGunScript : MonoBehaviour
     {
         if (context.action.triggered)
         {
-            RaycastHit hit;
-            if (Physics.Raycast(launchOrigin.position, launchOrigin.forward, out hit, Mathf.Infinity, layers))
+            bool insideOrb = false;
+            PlayerMovement pm = this.gameObject.GetComponentInParent<PlayerMovement>();
+            if (pm != null)
             {
-                GameObject objectHit = hit.transform.gameObject;
-                if (objectHit.layer == 7 || objectHit.layer == 8)
+                foreach (GravityField f in pm.currentFieldCollisions)
                 {
-                    GravityField f = objectHit.transform.GetComponentInParent<GravityField>();
                     if (f.GetActive())
                     {
+                        insideOrb = true;
+                        pm.currentFieldCollisions.Remove(f);
                         f.Implode();
-                        //Destroy(objectHit.transform.parent.gameObject);
                         orbCount++;
                         ui.UpdateOrbCount(orbCount);
+                        break;
                     }
                 }
             }
-        }
-        PlayerMovement pm = this.gameObject.GetComponentInParent<PlayerMovement>();
-        if (pm != null)
-        {
-            foreach (GravityField f in pm.currentFieldCollisions)
+            if (!insideOrb)
             {
-                if (f.GetActive())
+                RaycastHit hit;
+                if (Physics.Raycast(launchOrigin.position, launchOrigin.forward, out hit, Mathf.Infinity, layers))
                 {
-                    pm.currentFieldCollisions.Remove(f);
-                    f.Implode();
-                    orbCount++;
-                    ui.UpdateOrbCount(orbCount);
-                    break;
+                    GameObject objectHit = hit.transform.gameObject;
+                    if (objectHit.layer == 7 || objectHit.layer == 8)
+                    {
+                        GravityField f = objectHit.transform.GetComponentInParent<GravityField>();
+                        if (f.GetActive())
+                        {
+                            f.Implode();
+                            //Destroy(objectHit.transform.parent.gameObject);
+                            orbCount++;
+                            ui.UpdateOrbCount(orbCount);
+                        }
+                    }
                 }
             }
         }
