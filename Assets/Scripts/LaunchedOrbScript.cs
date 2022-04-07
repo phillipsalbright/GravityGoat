@@ -5,7 +5,7 @@ public class LaunchedOrbScript : MonoBehaviour
     [SerializeField] private GameObject field;
     private bool used = false;
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
         this.gameObject.GetComponent<Rigidbody>().velocity.Set(0, 0, 0);
         this.gameObject.GetComponent<GravityScript>().enabled = false;

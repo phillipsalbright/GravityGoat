@@ -1,34 +1,37 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class ButtonScript1 : MonoBehaviour
 {
     [SerializeField] private Animator crystalAnimator;
     [SerializeField] private Animator buttonAnimator;
     private bool pressed = false;
-    private int collisions = 0;
     public SlidingScript[] objectsToMove;
-
+    private List<GameObject> collidingObjects = new List<GameObject>();
 
     private void OnTriggerEnter(Collider other)
     {
-        collisions++;
-        if (!pressed)
+        int layer = other.gameObject.layer;
+        if (layer != 7 && layer != 8)
         {
-            pressed = true;
-            buttonAnimator.Play("ButtonPress");
-            //crystalAnimator.Play("CrystalRaise");
-            for(int i = 0; i < objectsToMove.Length; i++)
+            collidingObjects.Add(other.gameObject);
+            if (!pressed)
             {
-                objectsToMove[i].StartSlide();
+                pressed = true;
+                buttonAnimator.Play("ButtonPress");
+                //crystalAnimator.Play("CrystalRaise");
+                for (int i = 0; i < objectsToMove.Length; i++)
+                {
+                    objectsToMove[i].StartSlide();
+                }
             }
-           
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        collisions--;
-        if (collisions == 0)
+        collidingObjects.Remove(other.gameObject);
+        if (collidingObjects.Count == 0)
         {
             pressed = false;
             buttonAnimator.Play("ButtonUnpress");
