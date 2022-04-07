@@ -8,12 +8,16 @@ public class GravityField : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private ParticleSystem impactParticle;
     [SerializeField] private ParticleSystem destroyParticle;
+    [SerializeField] private SphereCollider field;
     private bool active;
 
     public void Start()
     {
-        impactParticle.Play();
         active = true;
+        if (destroyParticle.gameObject.activeSelf)
+        {
+            impactParticle.Play();
+        }
     }
 
     public bool GetActive()
@@ -43,6 +47,7 @@ public class GravityField : MonoBehaviour
         animator.Play("FieldAbsorb");
         destroyParticle.Play();
         this.GetComponent<Collider>().enabled = false;
+        field.enabled = false;
         this.GetComponent<MeshRenderer>().enabled = false;
         yield return new WaitForSeconds(.5f);
         this.GetComponentInChildren<Light>().enabled = false;
