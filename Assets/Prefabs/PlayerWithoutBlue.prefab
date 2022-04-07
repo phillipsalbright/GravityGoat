@@ -386,7 +386,7 @@ GameObject:
   - component: {fileID: 1121585428743062630}
   - component: {fileID: 3131164783968748539}
   m_Layer: 3
-  m_Name: Player
+  m_Name: PlayerWithoutBlue
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -621,8 +621,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8708701101854831157}
         m_TargetAssemblyTypeName: GravityGunScript, Assembly-CSharp
-        m_MethodName: OnAltShoot
-        m_Mode: 0
+        m_MethodName: 
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1436,7 +1436,7 @@ GameObject:
   - component: {fileID: 7334334015992277602}
   - component: {fileID: 7470314340233231224}
   - component: {fileID: 4351391158915461920}
-  - component: {fileID: 7113426550304302087}
+  - component: {fileID: 2927446848832469343}
   m_Layer: 3
   m_Name: BodySprite
   m_TagString: Untagged
@@ -1528,7 +1528,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!330 &7113426550304302087
+--- !u!330 &2927446848832469343
 ParticleSystemForceField:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

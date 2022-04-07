@@ -10,7 +10,8 @@ public class GravityGunScript : MonoBehaviour
     [SerializeField] private PlayerUIScript ui;
     /** Set to an empty game object child of the arm, the place where gravity orbs will be launched from */
     [SerializeField] private Transform launchOrigin;
-    private float projectileForce = 22f;
+    [SerializeField] private LayerMask layers;
+    private float projectileForce = 25f;
     private float fireRate = 1f;
     private float nextTimeToFire = 0f;
 
@@ -19,7 +20,7 @@ public class GravityGunScript : MonoBehaviour
         ui.UpdateOrbCount(orbCount);
     }
 
-    public void OnShoot(InputAction.CallbackContext context)
+    public void OnAltShoot(InputAction.CallbackContext context)
     {
         if (context.action.triggered && orbCount > 0 && Time.time >= nextTimeToFire)
         {
@@ -31,7 +32,7 @@ public class GravityGunScript : MonoBehaviour
         }
     }
 
-    public void OnAltShoot(InputAction.CallbackContext context)
+    public void OnShoot(InputAction.CallbackContext context)
     {
         if (context.action.triggered && orbCount > 0 && Time.time >= nextTimeToFire)
         {
@@ -48,14 +49,19 @@ public class GravityGunScript : MonoBehaviour
         if (context.action.triggered)
         {
             RaycastHit hit;
-            if (Physics.Raycast(launchOrigin.position, launchOrigin.forward, out hit))
+            if (Physics.Raycast(launchOrigin.position, launchOrigin.forward, out hit, Mathf.Infinity, layers))
             {
                 GameObject objectHit = hit.transform.gameObject;
                 if (objectHit.layer == 7 || objectHit.layer == 8)
                 {
-                    Destroy(objectHit.transform.parent.gameObject);
-                    orbCount++;
-                    ui.UpdateOrbCount(orbCount);
+                    GravityField f = objectHit.transform.GetComponentInParent<GravityField>();
+                    if (f.GetActive())
+                    {
+                        f.Implode();
+                        //Destroy(objectHit.transform.parent.gameObject);
+                        orbCount++;
+                        ui.UpdateOrbCount(orbCount);
+                    }
                 }
             }
         }
@@ -64,11 +70,14 @@ public class GravityGunScript : MonoBehaviour
         {
             foreach (GravityField f in pm.currentFieldCollisions)
             {
-                pm.currentFieldCollisions.Remove(f);
-                Destroy(f.gameObject);
-                orbCount++;
-                ui.UpdateOrbCount(orbCount);
-                break;
+                if (f.GetActive())
+                {
+                    pm.currentFieldCollisions.Remove(f);
+                    f.Implode();
+                    orbCount++;
+                    ui.UpdateOrbCount(orbCount);
+                    break;
+                }
             }
         }
     }

@@ -6,6 +6,7 @@ public class ButtonScript1 : MonoBehaviour
     [SerializeField] private Animator buttonAnimator;
     private bool pressed = false;
     private int collisions = 0;
+    public SlidingScript[] objectsToMove;
 
 
     private void OnTriggerEnter(Collider other)
@@ -15,7 +16,12 @@ public class ButtonScript1 : MonoBehaviour
         {
             pressed = true;
             buttonAnimator.Play("ButtonPress");
-            crystalAnimator.Play("CrystalRaise");
+            //crystalAnimator.Play("CrystalRaise");
+            for(int i = 0; i < objectsToMove.Length; i++)
+            {
+                objectsToMove[i].StartSlide();
+            }
+           
         }
     }
 
@@ -26,7 +32,11 @@ public class ButtonScript1 : MonoBehaviour
         {
             pressed = false;
             buttonAnimator.Play("ButtonUnpress");
-            crystalAnimator.Play("CrystalUnraise");
+            //crystalAnimator.Play("CrystalUnraise");
+            for (int i = 0; i < objectsToMove.Length; i++)
+            {
+                objectsToMove[i].EndSlide();
+            }
         }
 
     }
