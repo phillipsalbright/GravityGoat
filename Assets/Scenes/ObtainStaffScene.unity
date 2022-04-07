@@ -3144,6 +3144,10 @@ PrefabInstance:
       propertyPath: ExternalForcesModule.influenceFilter
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5486972773086335070, guid: af6353ac963394e47af450f40f4874e4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7046056493385861184, guid: af6353ac963394e47af450f40f4874e4, type: 3}
       propertyPath: m_Name
       value: InwardOrb
