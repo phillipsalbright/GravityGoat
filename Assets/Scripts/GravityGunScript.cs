@@ -14,6 +14,7 @@ public class GravityGunScript : MonoBehaviour
     private float projectileForce = 25f;
     private float fireRate = 1f;
     private float nextTimeToFire = 0f;
+    private int mode = 2;
 
     private void Start()
     {
@@ -48,27 +49,50 @@ public class GravityGunScript : MonoBehaviour
     {
         if (context.action.triggered)
         {
-            bool insideOrb = false;
-            PlayerMovement pm = this.gameObject.GetComponentInParent<PlayerMovement>();
-            if (pm != null)
+            if (mode == 0)
             {
-                foreach (GravityField f in pm.currentFieldCollisions)
+                bool insideOrb = false;
+                PlayerMovement pm = this.gameObject.GetComponentInParent<PlayerMovement>();
+                if (pm != null)
                 {
-                    if (f.GetActive())
+                    foreach (GravityField f in pm.currentFieldCollisions)
                     {
-                        insideOrb = true;
-                        pm.currentFieldCollisions.Remove(f);
-                        f.Implode();
-                        orbCount++;
-                        ui.UpdateOrbCount(orbCount);
-                        break;
+                        if (f.GetActive())
+                        {
+                            insideOrb = true;
+                            pm.currentFieldCollisions.Remove(f);
+                            f.Implode();
+                            orbCount++;
+                            ui.UpdateOrbCount(orbCount);
+                            break;
+                        }
                     }
                 }
-            }
-            if (!insideOrb)
+                if (!insideOrb)
+                {
+                    RaycastHit hit;
+                    if (Physics.Raycast(launchOrigin.position, launchOrigin.forward, out hit, Mathf.Infinity, layers))
+                    {
+                        GameObject objectHit = hit.transform.gameObject;
+                        if (objectHit.layer == 7 || objectHit.layer == 8)
+                        {
+                            GravityField f = objectHit.transform.GetComponentInParent<GravityField>();
+                            if (f.GetActive())
+                            {
+                                f.Implode();
+                                //Destroy(objectHit.transform.parent.gameObject);
+                                orbCount++;
+                                ui.UpdateOrbCount(orbCount);
+                            }
+                        }
+                    }
+                }
+            } else if (mode == 1)
             {
+                Ray ray = Camera.main.ScreenPointToRay(new Vector3(Mouse.current.position.ReadValue().x, Mouse.current.position.ReadValue().y, 0));
+                Vector3 position = new Vector3(arm.mouse_pos.x, arm.mouse_pos.y, GameObject.FindGameObjectWithTag("MainCamera").transform.position.z);
                 RaycastHit hit;
-                if (Physics.Raycast(launchOrigin.position, launchOrigin.forward, out hit, Mathf.Infinity, layers))
+                if (Physics.Raycast(ray.origin, ray.direction, out hit,  Mathf.Infinity, layers))
                 {
                     GameObject objectHit = hit.transform.gameObject;
                     if (objectHit.layer == 7 || objectHit.layer == 8)
@@ -83,7 +107,69 @@ public class GravityGunScript : MonoBehaviour
                         }
                     }
                 }
+            } else if (mode == 2)
+            {
+                bool orbObtained = false;
+                Ray ray = Camera.main.ScreenPointToRay(new Vector3(Mouse.current.position.ReadValue().x, Mouse.current.position.ReadValue().y, 0));
+                Vector3 position = new Vector3(arm.mouse_pos.x, arm.mouse_pos.y, GameObject.FindGameObjectWithTag("MainCamera").transform.position.z);
+                RaycastHit hit;
+                if (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, layers))
+                {
+                    GameObject objectHit = hit.transform.gameObject;
+                    if (objectHit.layer == 7 || objectHit.layer == 8)
+                    {
+                        GravityField f = objectHit.transform.GetComponentInParent<GravityField>();
+                        if (f.GetActive())
+                        {
+                            f.Implode();
+                            //Destroy(objectHit.transform.parent.gameObject);
+                            orbCount++;
+                            ui.UpdateOrbCount(orbCount);
+                            orbObtained = true;
+                        }
+                    }
+                }
+                if (!orbObtained)
+                {
+                    bool insideOrb = false;
+                    PlayerMovement pm = this.gameObject.GetComponentInParent<PlayerMovement>();
+                    if (pm != null)
+                    {
+                        foreach (GravityField f in pm.currentFieldCollisions)
+                        {
+                            if (f.GetActive())
+                            {
+                                insideOrb = true;
+                                pm.currentFieldCollisions.Remove(f);
+                                f.Implode();
+                                orbCount++;
+                                ui.UpdateOrbCount(orbCount);
+                                break;
+                            }
+                        }
+                    }
+                    if (!insideOrb)
+                    {
+                        RaycastHit hit2;
+                        if (Physics.Raycast(launchOrigin.position, launchOrigin.forward, out hit2, Mathf.Infinity, layers))
+                        {
+                            GameObject objectHit = hit2.transform.gameObject;
+                            if (objectHit.layer == 7 || objectHit.layer == 8)
+                            {
+                                GravityField f = objectHit.transform.GetComponentInParent<GravityField>();
+                                if (f.GetActive())
+                                {
+                                    f.Implode();
+                                    //Destroy(objectHit.transform.parent.gameObject);
+                                    orbCount++;
+                                    ui.UpdateOrbCount(orbCount);
+                                }
+                            }
+                        }
+                    }
+                }
             }
+            
         }
     }
 }
