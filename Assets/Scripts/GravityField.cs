@@ -9,6 +9,7 @@ public class GravityField : MonoBehaviour
     [SerializeField] private ParticleSystem impactParticle;
     [SerializeField] private ParticleSystem destroyParticle;
     [SerializeField] private SphereCollider field;
+    [SerializeField] private AudioSource implodingSound;
     private bool active;
 
     public void Start()
@@ -49,6 +50,7 @@ public class GravityField : MonoBehaviour
         this.GetComponent<Collider>().enabled = false;
         field.enabled = false;
         this.GetComponent<MeshRenderer>().enabled = false;
+        implodingSound.Play();
         yield return new WaitForSeconds(.5f);
         this.GetComponentInChildren<Light>().enabled = false;
         yield return new WaitForSeconds(2f);

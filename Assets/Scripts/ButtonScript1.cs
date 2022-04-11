@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.Audio;
 
 public class ButtonScript1 : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class ButtonScript1 : MonoBehaviour
             {
                 pressed = true;
                 buttonAnimator.Play("ButtonPress");
+                this.GetComponentInParent<AudioSource>().Play();
                 //crystalAnimator.Play("CrystalRaise");
                 for (int i = 0; i < objectsToMove.Length; i++)
                 {
