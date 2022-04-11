@@ -32,4 +32,9 @@ public class MainMenuObject : MonoBehaviour
     {
         SceneManager.LoadScene(sceneIndex);
     }
+
+    private void Start()
+    {
+        AudioListener.volume = PlayerPrefs.GetFloat("Volume", 1f);
+    }
 }
