@@ -3755,6 +3755,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1343156570}
     m_Modifications:
+    - target: {fileID: 2258352693937042870, guid: f0857492d3596214e97d55fc5a875132, type: 3}
+      propertyPath: m_Volume
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2529325993721528165, guid: f0857492d3596214e97d55fc5a875132, type: 3}
       propertyPath: m_Name
       value: OutwardOrb
