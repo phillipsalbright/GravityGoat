@@ -48,8 +48,6 @@ public class SlidingScript : MonoBehaviour
         isSlided = true;
         while (time < 1)
         {
-
-            Debug.Log("1");
             transform.localPosition = Vector3.Lerp(startPosLocal, finalPos, time);
             yield return null;
             time += Time.deltaTime;

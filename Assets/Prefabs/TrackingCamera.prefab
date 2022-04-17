@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8270121498650968156}
   - component: {fileID: 2366100630052756667}
   - component: {fileID: 8403161412068185599}
+  - component: {fileID: 7983219506684232353}
   m_Layer: 0
   m_Name: TrackingCamera
   m_TagString: MainCamera
@@ -98,7 +99,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -126,3 +127,11 @@ MonoBehaviour:
   minXPos: -6.1
   zval: -17.1
   player: {fileID: 0}
+--- !u!81 &7983219506684232353
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7912512874258661090}
+  m_Enabled: 1

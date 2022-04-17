@@ -25,8 +25,6 @@ public class TrackingCameraScript : MonoBehaviour
         {
             float yval = player.transform.position.y;
             float xval = player.transform.position.x;
-
-            Debug.Log(xval + " " + yval);
             if (yval >= maxYPos)
             {
                 yval = maxYPos;
