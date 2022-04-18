@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 /**
  * This class handles the basic, phsyics based, player movement. Many of the variables should be
@@ -29,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
     /** Multiplier for gravity. Drag is used to limit X and Y movement in air, may need extra gravity because of this. */
     private float gravityMultiplier = 2.6f;
     /** Multiplier for gravity within a gravitational field */
-    private float fieldGravityMultiplier = .5f;
+    private float fieldGravityMultiplier = .6f;
     private bool jumped;
 
     [Header("Drag")]
@@ -51,11 +52,13 @@ public class PlayerMovement : MonoBehaviour
     private float playerHeight = 2;
     /** Rigidbody of the player */
     public Rigidbody player;
-    private bool paused;
+    private bool paused = false;
     private bool walking;
     [SerializeField] Animator bodyAnimator;
 
     public List<GravityField> currentFieldCollisions = new List<GravityField>();
+    [SerializeField] Canvas pauseMenu;
+    [SerializeField] PlayerInput input;
     
     void Start()
     {
@@ -107,15 +110,29 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        walking = context.action.triggered;
-        bodyAnimator.SetBool("Walking", walking);
         horizontalMovement = context.ReadValue<Vector2>().x;
+        if (Mathf.Abs(horizontalMovement) > 0)
+        {
+            walking = true;
+        } else
+        {
+            walking = false;
+        }
+        bodyAnimator.SetBool("Walking", walking);
         if (currentFieldCollisions.Count > 0)
         {
             verticalMovement = context.ReadValue<Vector2>().y;
         } else
         {
             verticalMovement = 0;
+        }
+    }
+
+    public void OnRestart(InputAction.CallbackContext context)
+    {
+        if (context.action.triggered)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 
@@ -135,7 +152,7 @@ public class PlayerMovement : MonoBehaviour
             Vector3 forceSum = new Vector3(0, 0, 0);
             foreach(GravityField f in currentFieldCollisions)
             {
-                if (f != null)
+                if (f != null && f.GetActive())
                 {
                     forceSum += (this.transform.position - f.GetPosition()) * f.GetOutwardForce();
                 } else
@@ -185,7 +202,32 @@ public class PlayerMovement : MonoBehaviour
 
     public void Pause(InputAction.CallbackContext context)
     {
-        paused = context.action.triggered;
+        if (context.action.triggered)
+        {
+            if (!paused)
+            {
+                paused = true;
+                input.DeactivateInput();
+                GetComponentInChildren<ArmScript>().enabled = false;
+                Time.timeScale = 0;
+                pauseMenu.gameObject.SetActive(true);
+            }
+            else
+            {
+                ResumeGame();
+            }
+        }
+        
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1;
+        pauseMenu.gameObject.SetActive(false);
+        input.ActivateInput();
+        GetComponentInChildren<ArmScript>().enabled = true;
+
+        paused = false;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -202,5 +244,11 @@ public class PlayerMovement : MonoBehaviour
         {
             currentFieldCollisions.Remove(other.gameObject.GetComponentInParent<GravityField>());
         }
+    }
+
+    public void LoadMainMenu()
+    {
+        ResumeGame();
+        SceneManager.LoadScene(0);
     }
 }
