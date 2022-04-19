@@ -258,6 +258,10 @@ public class PlayerMovement : MonoBehaviour
     public void LoadMainMenu()
     {
         ResumeGame();
+        if (MusicManager.musicManager != null)
+        {
+            MusicManager.musicManager.PlayMusic(-1);
+        }
         SceneManager.LoadScene(0);
     }
 }
