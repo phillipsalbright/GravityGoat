@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3332970566473558042}
   - component: {fileID: 3311785111767575682}
   - component: {fileID: 3725632961113825639}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Particle2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4873,7 +4873,7 @@ GameObject:
   - component: {fileID: 4528900036278597208}
   - component: {fileID: 5104518564437818518}
   - component: {fileID: 1885646503045600571}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Particle1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9739,7 +9739,7 @@ GameObject:
   - component: {fileID: 4898097664913366112}
   - component: {fileID: 3791707484592167369}
   - component: {fileID: 5699186483754922301}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: InwardOrb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9856,7 +9856,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 147428b65ff801b45a0ff2f1b45ccafc, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.8
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -9952,7 +9952,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: ec70301e48516ce4286eb5dedf7fec8d, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.8
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -10161,7 +10161,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6480019887872913243}
   - component: {fileID: 5841699861452217572}
-  m_Layer: 9
+  m_Layer: 7
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}

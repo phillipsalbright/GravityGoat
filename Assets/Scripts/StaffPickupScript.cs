@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class StaffPickupScript : MonoBehaviour
@@ -23,6 +21,10 @@ public class StaffPickupScript : MonoBehaviour
             door.SetActive(true);
             levelLoader.SetActive(true);
             particles.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+            if (MusicManager.musicManager != null)
+            {
+                MusicManager.musicManager.PlayMusic(0);
+            }
             Destroy(this.gameObject);
         }
     }
