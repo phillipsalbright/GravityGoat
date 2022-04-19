@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6139476545995670767}
   - component: {fileID: 3866099270706662601}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 1866760728670162591}
   - component: {fileID: 2258352693937042870}
   - component: {fileID: 5692306826198460751}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: OutwardOrb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -531,7 +531,7 @@ GameObject:
   - component: {fileID: 6223982906734931431}
   - component: {fileID: 3724962852078494417}
   - component: {fileID: 8449083040935653554}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Particle1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5393,7 +5393,7 @@ GameObject:
   - component: {fileID: 8795367074986788142}
   - component: {fileID: 4443488499400657033}
   - component: {fileID: 5336821652065116837}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Particle2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

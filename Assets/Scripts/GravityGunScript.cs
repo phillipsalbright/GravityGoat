@@ -22,6 +22,9 @@ public class GravityGunScript : MonoBehaviour
     private void Start()
     {
         ui.UpdateOrbCount(orbCount);
+        Physics.IgnoreLayerCollision(7, 8);
+        Physics.IgnoreLayerCollision(7, 7);
+        Physics.IgnoreLayerCollision(8, 8);
     }
 
     public void OnAltShoot(InputAction.CallbackContext context)
@@ -56,6 +59,7 @@ public class GravityGunScript : MonoBehaviour
             launchedOrb = Instantiate(outwardOrb, launchOrigin.TransformPoint(0, 0, 0) + new Vector3(0, 0, -.5f), launchOrigin.rotation);
         }
         firingSound.Play();
+        Physics.IgnoreLayerCollision(7, 8);
         launchedOrb.GetComponent<Rigidbody>().AddForce(launchOrigin.forward * projectileForce, ForceMode.Impulse);
     }
 
