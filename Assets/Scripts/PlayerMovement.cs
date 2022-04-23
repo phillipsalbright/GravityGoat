@@ -64,6 +64,15 @@ public class PlayerMovement : MonoBehaviour
     {
         player.useGravity = false;
         player.freezeRotation = true;
+        moveSpeed = 4.5f;
+        movementMultiplier = 10f;
+        airMultiplier = .2f;
+        jumpForce = 14;
+        gravityMultiplier = 2.6f;
+        fieldGravityMultiplier = .6f;
+        groundDrag = 6;
+        airDrag = 1.5f;
+        groundDistance = .4f;
     }
 
     void Update()
@@ -249,6 +258,10 @@ public class PlayerMovement : MonoBehaviour
     public void LoadMainMenu()
     {
         ResumeGame();
+        if (MusicManager.musicManager != null)
+        {
+            MusicManager.musicManager.PlayMusic(-1);
+        }
         SceneManager.LoadScene(0);
     }
 }
