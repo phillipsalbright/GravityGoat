@@ -6,7 +6,7 @@ public class TrackingCameraScript : MonoBehaviour
 
     public float minYPos = -10;
 
-    public float maxXPos = 10;
+    public float maxXPos = 20;
 
     public float minXPos = -10;
 
