@@ -33,6 +33,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Level6.unity
     guid: 1b2e9a37a9b1f834fb00c87a3845f2b6
   - enabled: 1
+    path: Assets/Scenes/EndingOfSubmissionBuild.unity
+    guid: e131be1d83d4d864a88aa4361682e998
+  - enabled: 1
+    path: Assets/Scenes/WinScene.unity
+    guid: ce1c8130d682a7744bed746b829974a4
+  - enabled: 1
     path: Assets/Scenes/Sandbox.unity
     guid: a8b6e5426ba5f114992160b88f5b9a98
   m_configObjects: {}
