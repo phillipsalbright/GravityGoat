@@ -186,13 +186,16 @@ public class PlayerMovement : MonoBehaviour
 
         if (isGrounded && !OnSlope())
         {
+            Debug.Log("1 " + moveDirection + " " + moveSpeed + " " + movementMultiplier + " " + airMultiplier + " " + this.GetComponent<Rigidbody>().velocity.magnitude);
             player.AddForce(movementMultiplier * moveSpeed * moveDirection, ForceMode.Acceleration);
         } else if (isGrounded)
         {
+            Debug.Log("2 " + moveDirection + " " + moveSpeed + " " + movementMultiplier + " " + airMultiplier + " " + this.GetComponent<Rigidbody>().velocity.magnitude);
             slopeMoveDirection = Vector3.ProjectOnPlane(moveDirection, slopeHit.normal);
             player.AddForce(moveSpeed * movementMultiplier * slopeMoveDirection.normalized, ForceMode.Acceleration);
         } else
         {
+            Debug.Log("3 " + moveDirection + " " + moveSpeed + " " + movementMultiplier + " " + airMultiplier + " " + this.GetComponent<Rigidbody>().velocity.magnitude);
             player.AddForce(airMultiplier * movementMultiplier * moveSpeed * moveDirection.normalized, ForceMode.Acceleration);
         }
         
