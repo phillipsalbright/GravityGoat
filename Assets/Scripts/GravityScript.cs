@@ -3,9 +3,8 @@ using System.Collections.Generic;
 
 public class GravityScript : MonoBehaviour
 {
-    private float gravityMultiplier = 2.6f;
+    //private float gravityMultiplier = 2.6f;
     private float fieldGravityMultiplier = .7f;
-    private Vector3 fieldLocation;
     private Rigidbody rb;
 
     List<GravityField> currentFieldCollisions = new List<GravityField>();
@@ -43,7 +42,7 @@ public class GravityScript : MonoBehaviour
             Vector3 forceSum = new Vector3(0, 0, 0);
             foreach (GravityField f in currentFieldCollisions)
             {
-                if (f != null)
+                if (f != null && f.GetActive())
                 {
                     forceSum += (this.transform.position - f.GetPosition()) * f.GetOutwardForce();
                 }
@@ -53,10 +52,11 @@ public class GravityScript : MonoBehaviour
                     break;
                 }
             }
+            rb.useGravity = false;
             rb.AddForce(forceSum * Physics.gravity.magnitude * fieldGravityMultiplier, ForceMode.Acceleration);
         } else
         {
-            rb.AddForce(Physics.gravity * gravityMultiplier, ForceMode.Acceleration);
+            rb.useGravity = true;
         }
     }
 }

@@ -105,9 +105,16 @@ public class IntroductionPlayerMovementScript : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        walking = context.action.triggered;
-        bodyAnimator.SetBool("Walking", walking);
         horizontalMovement = context.ReadValue<Vector2>().x;
+        if (Mathf.Abs(horizontalMovement) > 0)
+        {
+            walking = true;
+        }
+        else
+        {
+            walking = false;
+        }
+        bodyAnimator.SetBool("Walking", walking);
         Vector3 rot = player.rotation.eulerAngles;
         if (horizontalMovement < 0)
         {
@@ -149,7 +156,7 @@ public class IntroductionPlayerMovementScript : MonoBehaviour
             Vector3 forceSum = new Vector3(0, 0, 0);
             foreach (GravityField f in currentFieldCollisions)
             {
-                if (f != null)
+                if (f != null && f.GetActive())
                 {
                     forceSum += (this.transform.position - f.GetPosition()) * f.GetOutwardForce();
                 }

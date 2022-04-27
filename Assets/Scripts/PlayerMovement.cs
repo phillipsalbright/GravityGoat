@@ -64,6 +64,15 @@ public class PlayerMovement : MonoBehaviour
     {
         player.useGravity = false;
         player.freezeRotation = true;
+        moveSpeed = 4.5f;
+        movementMultiplier = 10f;
+        airMultiplier = .2f;
+        jumpForce = 14;
+        gravityMultiplier = 2.6f;
+        fieldGravityMultiplier = .6f;
+        groundDrag = 6;
+        airDrag = 1.5f;
+        groundDistance = .4f;
     }
 
     void Update()
@@ -110,9 +119,15 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        walking = context.action.triggered;
-        bodyAnimator.SetBool("Walking", walking);
         horizontalMovement = context.ReadValue<Vector2>().x;
+        if (Mathf.Abs(horizontalMovement) > 0)
+        {
+            walking = true;
+        } else
+        {
+            walking = false;
+        }
+        bodyAnimator.SetBool("Walking", walking);
         if (currentFieldCollisions.Count > 0)
         {
             verticalMovement = context.ReadValue<Vector2>().y;
@@ -146,7 +161,7 @@ public class PlayerMovement : MonoBehaviour
             Vector3 forceSum = new Vector3(0, 0, 0);
             foreach(GravityField f in currentFieldCollisions)
             {
-                if (f != null)
+                if (f != null && f.GetActive())
                 {
                     forceSum += (this.transform.position - f.GetPosition()) * f.GetOutwardForce();
                 } else
@@ -171,13 +186,16 @@ public class PlayerMovement : MonoBehaviour
 
         if (isGrounded && !OnSlope())
         {
+            Debug.Log("1 " + moveDirection + " " + moveSpeed + " " + movementMultiplier + " " + airMultiplier + " " + this.GetComponent<Rigidbody>().velocity.magnitude);
             player.AddForce(movementMultiplier * moveSpeed * moveDirection, ForceMode.Acceleration);
         } else if (isGrounded)
         {
+            Debug.Log("2 " + moveDirection + " " + moveSpeed + " " + movementMultiplier + " " + airMultiplier + " " + this.GetComponent<Rigidbody>().velocity.magnitude);
             slopeMoveDirection = Vector3.ProjectOnPlane(moveDirection, slopeHit.normal);
             player.AddForce(moveSpeed * movementMultiplier * slopeMoveDirection.normalized, ForceMode.Acceleration);
         } else
         {
+            Debug.Log("3 " + moveDirection + " " + moveSpeed + " " + movementMultiplier + " " + airMultiplier + " " + this.GetComponent<Rigidbody>().velocity.magnitude);
             player.AddForce(airMultiplier * movementMultiplier * moveSpeed * moveDirection.normalized, ForceMode.Acceleration);
         }
         
@@ -243,6 +261,10 @@ public class PlayerMovement : MonoBehaviour
     public void LoadMainMenu()
     {
         ResumeGame();
+        if (MusicManager.musicManager != null)
+        {
+            MusicManager.musicManager.PlayMusic(-1);
+        }
         SceneManager.LoadScene(0);
     }
 }
