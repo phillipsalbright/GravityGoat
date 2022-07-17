@@ -1,8 +1,13 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
-public class IntroductionPlayerMovementScript : MonoBehaviour
+/**
+ * This class handles the basic, phsyics based, player movement. Many of the variables should be
+ * specified in the editor.
+ */
+public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
     /** Value for speed to apply to the player */
@@ -25,7 +30,7 @@ public class IntroductionPlayerMovementScript : MonoBehaviour
     /** Multiplier for gravity. Drag is used to limit X and Y movement in air, may need extra gravity because of this. */
     private float gravityMultiplier = 2.6f;
     /** Multiplier for gravity within a gravitational field */
-    private float fieldGravityMultiplier = .5f;
+    private float fieldGravityMultiplier = .6f;
     private bool jumped;
 
     [Header("Drag")]
@@ -47,22 +52,38 @@ public class IntroductionPlayerMovementScript : MonoBehaviour
     private float playerHeight = 2;
     /** Rigidbody of the player */
     public Rigidbody player;
-    private bool paused;
+    private bool paused = false;
     private bool walking;
     [SerializeField] Animator bodyAnimator;
-    [SerializeField] Transform BodySprite;
 
     public List<GravityField> currentFieldCollisions = new List<GravityField>();
+    [SerializeField] Canvas pauseMenu;
+    [SerializeField] PlayerInput input;
 
+    private bool isOnMovingPlatform;
+    [SerializeField] private LayerMask movingPlatformMask;
+    private Collider playerCollider;
+    
     void Start()
     {
         player.useGravity = false;
         player.freezeRotation = true;
+        moveSpeed = 4.5f;
+        movementMultiplier = 10f;
+        airMultiplier = .2f;
+        jumpForce = 14;
+        gravityMultiplier = 2.6f;
+        fieldGravityMultiplier = .6f;
+        groundDrag = 6;
+        airDrag = 1.5f;
+        groundDistance = .4f;
+        playerCollider = this.GetComponentInChildren<Collider>();
     }
 
     void Update()
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        isOnMovingPlatform = Physics.CheckSphere(groundCheck.position, groundDistance, movingPlatformMask);
         //GetInput();
         ControlDrag();
         if (jumped && isGrounded)
@@ -74,6 +95,15 @@ public class IntroductionPlayerMovementScript : MonoBehaviour
             //GameManager.instance.PauseGame();
             paused = false;
         }
+        if (isOnMovingPlatform) {
+            playerCollider.material.dynamicFriction = 1;
+            playerCollider.material.staticFriction = 1;
+        } else
+        {
+            playerCollider.material.dynamicFriction = 0;
+            playerCollider.material.staticFriction = 0;
+        }
+
     }
 
     public void OnJump(InputAction.CallbackContext context)
@@ -95,8 +125,7 @@ public class IntroductionPlayerMovementScript : MonoBehaviour
         {
             bodyAnimator.SetBool("InAir", false);
             player.drag = groundDrag;
-        }
-        else
+        } else
         {
             bodyAnimator.SetBool("InAir", true);
             player.drag = airDrag;
@@ -109,34 +138,25 @@ public class IntroductionPlayerMovementScript : MonoBehaviour
         if (Mathf.Abs(horizontalMovement) > 0)
         {
             walking = true;
-        }
-        else
+        } else
         {
             walking = false;
         }
         bodyAnimator.SetBool("Walking", walking);
-        Vector3 rot = player.rotation.eulerAngles;
-        if (horizontalMovement < 0)
-        {
-            rot.y = 180;
-            BodySprite.GetComponent<SpriteRenderer>().flipX = true;
-            BodySprite.localRotation = Quaternion.Euler(new Vector3(0, 180, 0));
-        } else if (horizontalMovement > 0)
-        {
-            rot.y = 0;
-            BodySprite.GetComponent<SpriteRenderer>().flipX = false;
-            BodySprite.localRotation = Quaternion.Euler(rot);
-        }
-        player.freezeRotation = false;
-        transform.rotation = Quaternion.Euler(rot);
-        player.freezeRotation = true;
         if (currentFieldCollisions.Count > 0)
         {
             verticalMovement = context.ReadValue<Vector2>().y;
-        }
-        else
+        } else
         {
             verticalMovement = 0;
+        }
+    }
+
+    public void OnRestart(InputAction.CallbackContext context)
+    {
+        if (context.action.triggered)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 
@@ -154,25 +174,34 @@ public class IntroductionPlayerMovementScript : MonoBehaviour
         if (currentFieldCollisions.Count > 0)
         {
             Vector3 forceSum = new Vector3(0, 0, 0);
-            foreach (GravityField f in currentFieldCollisions)
+            foreach(GravityField f in currentFieldCollisions)
             {
                 if (f != null && f.GetActive())
                 {
-                    forceSum += (this.transform.position - f.GetPosition()) * f.GetOutwardForce();
-                }
-                else
+                    /** accurate */
+                    Vector3 direction = ((this.transform.position - f.GetPosition()) * f.GetOutwardForce()).normalized;
+                    float magnitude = ((this.transform.position - f.GetPosition()) * f.GetOutwardForce()).magnitude;
+                    magnitude = Mathf.Clamp(magnitude, 0, 3.5f);
+                    magnitude = 3.5f - magnitude;
+                    magnitude = magnitude / 10.5f;
+                    magnitude += 2.1f;
+                    forceSum += direction * magnitude;
+                    Debug.Log(magnitude + " " + ((this.transform.position - f.GetPosition()) * f.GetOutwardForce()).magnitude);
+                    
+
+                    /** how its been */
+                    //forceSum += ((this.transform.position - f.GetPosition()) * f.GetOutwardForce());
+                } else
                 {
                     currentFieldCollisions.Remove(f);
                     break;
                 }
             }
             player.AddForce(forceSum * Physics.gravity.magnitude * fieldGravityMultiplier, ForceMode.Acceleration);
-        }
-        else if (!OnSlope())
+        } else if (!OnSlope())
         {
             player.AddForce(Physics.gravity * gravityMultiplier, ForceMode.Acceleration);
-        }
-        else
+        } else
         {
             player.AddForce(-slopeHit.normal * Physics.gravity.magnitude, ForceMode.Acceleration);
         }
@@ -184,24 +213,24 @@ public class IntroductionPlayerMovementScript : MonoBehaviour
 
         if (isGrounded && !OnSlope())
         {
+            //Debug.Log("1 " + moveDirection + " " + moveSpeed + " " + movementMultiplier + " " + airMultiplier + " " + this.GetComponent<Rigidbody>().velocity.magnitude);
             player.AddForce(movementMultiplier * moveSpeed * moveDirection, ForceMode.Acceleration);
-        }
-        else if (isGrounded)
+        } else if (isGrounded)
         {
+            //Debug.Log("2 " + moveDirection + " " + moveSpeed + " " + movementMultiplier + " " + airMultiplier + " " + this.GetComponent<Rigidbody>().velocity.magnitude);
             slopeMoveDirection = Vector3.ProjectOnPlane(moveDirection, slopeHit.normal);
             player.AddForce(moveSpeed * movementMultiplier * slopeMoveDirection.normalized, ForceMode.Acceleration);
-        }
-        else
+        } else
         {
+            //Debug.Log("3 " + moveDirection + " " + moveSpeed + " " + movementMultiplier + " " + airMultiplier + " " + this.GetComponent<Rigidbody>().velocity.magnitude);
             player.AddForce(airMultiplier * movementMultiplier * moveSpeed * moveDirection.normalized, ForceMode.Acceleration);
         }
-
+        
     }
 
     private bool OnSlope()
     {
-        if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * .5f + .5f))
-        {
+        if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * .5f + .5f)) {
             if (slopeHit.normal != Vector3.up)
             {
                 return true;
@@ -212,7 +241,32 @@ public class IntroductionPlayerMovementScript : MonoBehaviour
 
     public void Pause(InputAction.CallbackContext context)
     {
-        paused = context.action.triggered;
+        if (context.action.triggered)
+        {
+            if (!paused)
+            {
+                paused = true;
+                input.DeactivateInput();
+                GetComponentInChildren<ArmScript>().enabled = false;
+                Time.timeScale = 0;
+                pauseMenu.gameObject.SetActive(true);
+            }
+            else
+            {
+                ResumeGame();
+            }
+        }
+        
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1;
+        pauseMenu.gameObject.SetActive(false);
+        input.ActivateInput();
+        GetComponentInChildren<ArmScript>().enabled = true;
+
+        paused = false;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -229,5 +283,15 @@ public class IntroductionPlayerMovementScript : MonoBehaviour
         {
             currentFieldCollisions.Remove(other.gameObject.GetComponentInParent<GravityField>());
         }
+    }
+
+    public void LoadMainMenu()
+    {
+        ResumeGame();
+        if (MusicManager.musicManager != null)
+        {
+            MusicManager.musicManager.PlayMusic(-1);
+        }
+        SceneManager.LoadScene(0);
     }
 }

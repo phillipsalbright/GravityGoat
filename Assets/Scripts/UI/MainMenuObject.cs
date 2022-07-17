@@ -9,23 +9,9 @@ using UnityEngine.SceneManagement;
  */
 public class MainMenuObject : MonoBehaviour
 {
-    public GameObject[] menuScreens;
-
     public void QuitGame()
     {
         Application.Quit();
-    }
-
-    public void LoadScreen(int screenIndex)
-    {
-        menuScreens[screenIndex].SetActive(true);
-        for (int i = 0; i < menuScreens.Length; i++)
-        {
-            if (menuScreens[i].activeInHierarchy == true && i != screenIndex)
-            {
-                menuScreens[i].SetActive(false);
-            }
-        }
     }
 
     public void LoadScene(int sceneIndex)

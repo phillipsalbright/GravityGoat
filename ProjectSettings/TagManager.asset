@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - PlayButton
+  - Moving
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - IntroductionPlayer
   - PlayerWithoutBlue
   - Background
-  - 
+  - MovingPlatform
   - 
   - 
   - 

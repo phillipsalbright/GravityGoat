@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class GravityGunScript : MonoBehaviour
 {
@@ -75,7 +76,7 @@ public class GravityGunScript : MonoBehaviour
                 RaycastHit hit;
                 if (Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, layers))
                 {
-                    GameObject objectHit = hit.transform.gameObject;
+                    GameObject objectHit = hit.collider.transform.gameObject;
                     if (objectHit.layer == 7 || objectHit.layer == 8)
                     {
                         GravityField f = objectHit.transform.GetComponentInParent<GravityField>();
@@ -190,6 +191,23 @@ public class GravityGunScript : MonoBehaviour
                 }
             }
             
+        }
+    }
+
+    public void OnAllOrbRetrieve(InputAction.CallbackContext context)
+    {
+        if (context.action.triggered)
+        {
+            GravityField[] fields = GameObject.FindObjectsOfType<GravityField>();
+            foreach (GravityField f in fields)
+            {
+                if (f.GetActive())
+                {
+                    f.Implode();
+                    orbCount++;
+                    ui.UpdateOrbCount(orbCount);
+                }
+            }
         }
     }
 }

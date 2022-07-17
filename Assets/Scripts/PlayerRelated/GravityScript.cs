@@ -44,7 +44,18 @@ public class GravityScript : MonoBehaviour
             {
                 if (f != null && f.GetActive())
                 {
-                    forceSum += (this.transform.position - f.GetPosition()) * f.GetOutwardForce();
+                    /** accurate  */
+                    Vector3 direction = ((this.transform.position - f.GetPosition()) * f.GetOutwardForce()).normalized;
+                    float magnitude = ((this.transform.position - f.GetPosition()) * f.GetOutwardForce()).magnitude;
+                    magnitude = Mathf.Clamp(magnitude, 0, 3.5f);
+                    magnitude = 3.5f - magnitude;
+                    magnitude = magnitude / 10.5f;
+                    magnitude += 2.1f;
+                    forceSum += direction * magnitude;
+                   
+
+                    /** how its been */
+                    //forceSum += (this.transform.position - f.GetPosition()) * f.GetOutwardForce();
                 }
                 else
                 {
