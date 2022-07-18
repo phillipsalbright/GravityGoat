@@ -15,8 +15,7 @@ public class Arrow : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(rb.velocity);
-        if (rb.velocity != Vector3.zero)
+        if (rb != null && rb.velocity != Vector3.zero)
         {
             this.transform.rotation = Quaternion.LookRotation(rb.velocity);
         }
@@ -30,6 +29,7 @@ public class Arrow : MonoBehaviour
             GameObject.FindObjectOfType<PlayerMovement>().HitByArrow();
         }
         this.gameObject.GetComponent<Collider>().enabled = false;
+        this.gameObject.GetComponent<GravityScript>().enabled = false;
         Destroy(rb);
         this.gameObject.transform.parent = collision.gameObject.transform;
     }
