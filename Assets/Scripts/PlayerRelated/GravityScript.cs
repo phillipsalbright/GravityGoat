@@ -67,7 +67,10 @@ public class GravityScript : MonoBehaviour
             rb.AddForce(forceSum * Physics.gravity.magnitude * fieldGravityMultiplier, ForceMode.Acceleration);
         } else
         {
-            rb.useGravity = true;
+            if (this.gameObject.layer != 15)
+            {
+                rb.useGravity = true;
+            }
         }
     }
 }

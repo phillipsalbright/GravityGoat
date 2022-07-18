@@ -294,4 +294,9 @@ public class PlayerMovement : MonoBehaviour
         }
         SceneManager.LoadScene(0);
     }
+
+    public void HitByArrow()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 }
