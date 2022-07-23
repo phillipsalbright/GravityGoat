@@ -63,6 +63,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isOnMovingPlatform;
     [SerializeField] private LayerMask movingPlatformMask;
     private Collider playerCollider;
+    private bool inWater;
     
     void Start()
     {
@@ -129,6 +130,10 @@ public class PlayerMovement : MonoBehaviour
         {
             bodyAnimator.SetBool("InAir", true);
             player.drag = airDrag;
+        }
+        if (inWater)
+        {
+            player.drag = player.drag * 2;
         }
     }
 
@@ -275,6 +280,10 @@ public class PlayerMovement : MonoBehaviour
         {
             currentFieldCollisions.Add(other.gameObject.GetComponentInParent<GravityField>());
         }
+        if (other.gameObject.layer == 4)
+        {
+            inWater = true;
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -282,6 +291,10 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.layer == 7 || other.gameObject.layer == 8)
         {
             currentFieldCollisions.Remove(other.gameObject.GetComponentInParent<GravityField>());
+        }
+        if (other.gameObject.layer == 4)
+        {
+            inWater = false;
         }
     }
 
