@@ -6,6 +6,7 @@ TagManager:
   tags:
   - PlayButton
   - Moving
+  - Button
   layers:
   - Default
   - TransparentFX

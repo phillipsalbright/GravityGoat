@@ -467,6 +467,10 @@ MonoBehaviour:
   slidingDirection: {x: 0, y: 1, z: 0}
   startPos: {x: 0, y: 0, z: 0}
   slidingDistance: 5.2
+  playSound: 0
+  source: {fileID: 0}
+  timeToSlideUp: 1
+  timeToSlideDown: 1
 --- !u!4 &47047328 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4ea6956e2262503478399aeb0ec4964d, type: 3}
@@ -1509,7 +1513,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3384327704178256204, guid: 18071764ccc158348a202ec8eed0e03d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.85
+      value: 5.26
       objectReference: {fileID: 0}
     - target: {fileID: 3384327704178256204, guid: 18071764ccc158348a202ec8eed0e03d, type: 3}
       propertyPath: m_LocalPosition.z
