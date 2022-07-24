@@ -23,10 +23,10 @@ Material:
   m_Name: Crystal
   m_Shader: {fileID: -6465566751694194690, guid: 02cc6cd5b53684348aad291d429ce629, type: 3}
   m_ShaderKeywords: 
-  m_LightmapFlags: 4
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3001
+  m_CustomRenderQueue: 3000
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:

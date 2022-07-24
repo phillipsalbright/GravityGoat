@@ -14,6 +14,11 @@ public class LaunchedOrbScript : MonoBehaviour
             used = true;
             Instantiate(field, this.transform.position, this.transform.rotation);
             Destroy(this.gameObject);
+        } else if (other.gameObject.layer == 14 && !used)
+        {
+            used = true;
+            Instantiate(field, this.transform.position, this.transform.rotation, other.gameObject.transform);
+            Destroy(this.gameObject);
         }
     }
 }

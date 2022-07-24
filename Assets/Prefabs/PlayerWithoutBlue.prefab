@@ -604,12 +604,15 @@ MonoBehaviour:
   groundCheck: {fileID: 796891147133983010}
   groundMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 16448
   player: {fileID: 1341684306945711390}
   bodyAnimator: {fileID: 4351391158915461920}
   currentFieldCollisions: []
   pauseMenu: {fileID: 1387039773612411484}
   input: {fileID: 3131164783968748539}
+  movingPlatformMask:
+    serializedVersion: 2
+    m_Bits: 16384
 --- !u!114 &3131164783968748539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -747,6 +750,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: a51d311a-5feb-4c47-b630-d8bded903906
     m_ActionName: Player/Retrieve[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8708701101854831157}
+        m_TargetAssemblyTypeName: GravityGunScript, Assembly-CSharp
+        m_MethodName: OnAllOrbRetrieve
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 240f6f8a-67ea-41ec-a85b-a8d15a4c4562
+    m_ActionName: Player/RetrieveAll[/Keyboard/r]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
