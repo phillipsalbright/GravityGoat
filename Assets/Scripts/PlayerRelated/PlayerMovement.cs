@@ -133,7 +133,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (inWater)
         {
-            player.drag = player.drag * 2;
+            player.drag = player.drag * 1.5f;
         }
     }
 
