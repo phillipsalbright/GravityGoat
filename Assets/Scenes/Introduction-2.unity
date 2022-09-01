@@ -1201,11 +1201,11 @@ MonoBehaviour:
 
 
     Press E while pointing at or hovering
-    over an orb with the mouse to retrieve it
+    over an orb with the mouse to retrieve it, or press R to retrieve all orbs in
+    the scene
 
 
-    Make your way through the doors
-    to try and get back to the surface'
+    Make your way through the doors to try and get back to the surface'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
